@@ -1,4 +1,4 @@
-package com.project.TestJar:
+package com.project.TestJar;
 
 import static org.testng.Assert.assertEquals;
 import java.util.concurrent.TimeUnit;
@@ -16,13 +16,16 @@ public static void main(String[] args) {
 
 System.setProperty("webdriver.chrome.driver","/home/darima/chromedriver");
 ChromeOptions chromeOptions = new ChromeOptions();
-chromeOptions.addArguments("--headless");
 chromeOptions.addArguments("--no-sandbox");
+chromeOptions.addArguments("--headless");
+chromeOptions.addArguments("--disable-dev-shm-usage");
+chromeOptions.addArguments("--remote-debugging-port=9222");
+chromeOptions.setExperimentalOption("useAutomationExtension", false);
+
 WebDriver driver = new ChromeDriver(chromeOptions);
 chromeOptions.addArguments("--headless");
 
-
-driver.get("http://localhost:8088");
+driver.get("http://localhost:8087");
 
 driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 driver.findElement(By.id("About Us")).click();
@@ -33,4 +36,3 @@ System.out.println("Test Succeeded!!");
 driver.quit();
 }
 }
-
