@@ -1,0 +1,37 @@
+---
+- hosts: web
+  become: true
+  become_user: root
+  tasks: 
+  - name: Install Git
+    package: 
+     name: git
+     state: present
+
+  - name: run update
+    apt:
+       update_cache: true
+
+  - name: install jdk
+    package:
+       name: default-jdk
+       state: present
+ 
+  - name: copy Chromedriver
+    copy:
+      src: /home/darima/chromedriver
+      dest: /home/darima/
+
+  - name: install chromium browser
+    package:
+      name: chromium-browser
+      state: present
+
+  - name: install chromium driver
+    package: 
+      name: chromium-chromedriver
+      state: present
+   
+  - name: Run update
+    apt:
+        update_cache: true 
